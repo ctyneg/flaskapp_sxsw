@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask.ext.googlemaps import GoogleMaps
 from forms import locationSelectionForm
-from find_location import show_nearest_location
+from find_recommendations import show_recommendations
  
 app = Flask(__name__)   
 GoogleMaps(app)   
@@ -18,7 +18,7 @@ def gmap():
 	if request.method=='POST':
 		selected_location=request.form['current_location']
 		selected_event=request.form['next_event']
-		calculations=show_nearest_location(selected_location,selected_event)
+		calculations=show_recommendations(selected_location,selected_event)
 		calc_status=calculations['message']
 		calc_events=calculations['next_events']
 		if calc_status=='SUCCESS':

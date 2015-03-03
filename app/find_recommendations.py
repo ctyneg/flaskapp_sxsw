@@ -7,7 +7,7 @@ import bs4
 import json
 import simplejson, urllib
 
-def show_nearest_location(current_loc, current_next_event):
+def show_recommendations(current_loc, current_next_event):
 	message="SUCCESS"
 	current_next_event_venue=""
 	current_next_event_start_date_time_string=""
