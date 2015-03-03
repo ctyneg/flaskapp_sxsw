@@ -10,6 +10,7 @@ import simplejson, urllib
 def show_recommendations(current_loc, current_next_event):
 	message="SUCCESS"
 	current_next_event_venue=""
+	current_next_event_coords=""
 	current_next_event_start_date_time_string=""
 	possible_future_events={}
 	possible_future_events_SCORE={}
@@ -116,12 +117,11 @@ def show_recommendations(current_loc, current_next_event):
 		#only get the events which start after current timing and ends before the user's next event
 		if start_day_time_datetime>current_time and end_day_time_datetime<current_next_event_start_datetime:
 			#check if event has valid location info, if not dont add to possible future events list
-			
 			if events_timings_event in venues_events:
 				venue=venues_events[events_timings_event]
 				for venues in venues_coords:
 					if venue.strip(" \n")==venues.strip(" \n"): 
-						#add event and start timing to list dictionary of possible future events
+					#add event and start timing to list dictionary of possible future events
 						possible_future_events.update({events_timings_event:start_day_time_datetime})
 						possible_event_added+=1
 
@@ -131,7 +131,7 @@ def show_recommendations(current_loc, current_next_event):
 		num_presenters_weightage=0.4
 		company_weightage=0.2
 		travellingtime_weightage=0.4
-		# ## for each possible event happening during the in-between time period, get a score based on their type ##
+		## for each possible event happening during the in-between time period, get a score based on their type ##
 		for possible_future_events_event in possible_future_events:
 			temp_type_unstripped=events_type[possible_future_events_event]
 			temp_type=temp_type_unstripped.strip(' \n')
@@ -173,7 +173,6 @@ def show_recommendations(current_loc, current_next_event):
 						saved_score=possible_future_events_SCORE[possible_future_events_SCORE_event]
 						new_score=saved_score+temp_score
 						possible_future_events_SCORE[possible_future_events_SCORE_event]=new_score
-				#possible_future_events_SCORE[number_of_presenters_event]=temp_score
 			elif number_of_presenters[number_of_presenters_event]==2:
 				temp_score_unrounded=num_presenters_weightage*2
 				temp_score=round(temp_score_unrounded,1)
@@ -182,7 +181,6 @@ def show_recommendations(current_loc, current_next_event):
 						saved_score=possible_future_events_SCORE[possible_future_events_SCORE_event]
 						new_score=saved_score+temp_score
 						possible_future_events_SCORE[possible_future_events_SCORE_event]=new_score
-				#possible_future_events_SCORE[number_of_presenters_event]=temp_score
 			else:
 				temp_score_unrounded=num_presenters_weightage*1
 				temp_score=round(temp_score_unrounded,1)
@@ -191,7 +189,6 @@ def show_recommendations(current_loc, current_next_event):
 						saved_score=possible_future_events_SCORE[possible_future_events_SCORE_event]
 						new_score=saved_score+temp_score
 						possible_future_events_SCORE[possible_future_events_SCORE_event]=new_score
-				#possible_future_events_SCORE[number_of_presenters_event]=temp_score
 
 		## for each possible event, calculate score based on whether company is a Fortune500 company ##
 		for possible_future_events_event in possible_future_events:
@@ -224,7 +221,7 @@ def show_recommendations(current_loc, current_next_event):
 			result_walking= simplejson.load(urllib.urlopen(url_walking))
 			walking_time = result_walking['rows'][0]['elements'][0]['duration']['value']
 			mins_walking_time=round(walking_time/60,1)
-			#<=5 mins:3   <=10mins:2 >10mins:1
+			#<=2.5 mins:3   <=10mins:2 >10mins:1
 			if mins_walking_time<=2.5:
 				temp_score=travellingtime_weightage*3
 				for possible_future_events_SCORE_event in possible_future_events_SCORE:
@@ -254,7 +251,6 @@ def show_recommendations(current_loc, current_next_event):
 		for event in possible_future_events_SCORE:
 			if possible_future_events_SCORE[event]==highest_score_value:
 				possible_future_events_final.append(event)
-
 	else:
 		#there are no recommended events for the user based on algorithm
 		message="FAILURE"
