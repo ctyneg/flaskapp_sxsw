@@ -1,4 +1,4 @@
 # flaskapp_sxsw
 SXSW Recommendation Algorithm
 
-Run routes.py
+Logic in app>find_recommendations.py
