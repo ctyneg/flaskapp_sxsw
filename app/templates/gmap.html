@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+  
+{% block content %}
+<body>
+  <h2>Where to next?</h2>
+  <h3>Find the next earliest event happening the nearest to where you are!</h3>
+
+	{% if success==True %}
+		<form action="{{ url_for('gmap') }}" method=post>
+		    {{ form.hidden_tag() }}
+		 	{{ form.current_location.label }}{{ form.current_location }}
+		</br>
+		    {{ form.next_event.label }}{{ form.next_event }}
+		 	</br>
+		 </br>
+		    {{ form.submit }}
+		 </form>
+		</br>
+		<h4>Your recommended event/s:</h4>
+	</br>
+	<table align="center">
+		{% for event in next_events %}
+			<tr>
+				<td>{{ event }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+		</br>
+	{% elif success==False %}
+		<form action="{{ url_for('gmap') }}" method=post>
+		    {{ form.hidden_tag() }}
+		    {{ form.current_location.label }}{{ form.current_location }}
+		</br>
+		    {{ form.next_event.label }}{{ form.next_event }}
+		 	</br>
+		 </br>
+		    {{ form.submit }}
+		 </form>
+		</br>
+		<p><i>There are no recommended events for you!</i></p>
+	</br>
+	{% else %}
+		<form action="{{ url_for('gmap') }}" method=post>
+		    {{ form.hidden_tag() }}
+		    {{ form.current_location.label }}{{ form.current_location }}
+		</br>
+		    {{ form.next_event.label }}{{ form.next_event }}
+		 	</br>
+		 </br>
+		    {{ form.submit }}
+		 </form>
+		</br>
+	{% endif %}
+{% endblock %}

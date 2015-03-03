@@ -1,0 +1,53 @@
+62,intel corporation
+38,dell
+105,oracle
+15,general motors
+200,dish network
+286,discover financial services
+77,hca
+102,google
+53,kraft foods
+72,the coca-cola company
+82,time warner cable
+278,republic services
+62,intel
+36,microsoft
+33,johnson & johnson
+108,mcdonald's corporation
+124,nike
+197,monsanto
+10,hewlett-packard
+412,mylan
+100,amazon
+225,qualcomm
+30,target
+267,ebay
+57,the walt disney company
+50,pepsico
+343,yahoo
+22,procter & gamble
+170,viacom
+490,live nation
+12,citigroup
+192,office depot
+63,aetna
+438,starwood hotels & resorts
+1,wal-mart
+289,crown
+7,at&t
+284,whole foods market
+82,time warner inc
+270,nordstrom
+311,darden restaurants
+4,general electric
+42,lowe's
+223,texas instruments
+494,electronic arts
+87,tyson foods
+130,aflac
+106,3m
+144,capital one
+351,fortune
+326,visa
+229,southwest airlines
+58,cisco
