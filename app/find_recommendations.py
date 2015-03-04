@@ -151,7 +151,7 @@ def show_recommendations(current_loc, current_next_event):
 				possible_future_events_SCORE[possible_future_events_event]=temp_score
 
 
-		## for each possible event happening during the in-between time period, get a score based on number of speakers ##
+		# ## for each possible event happening during the in-between time period, get a score based on number of speakers ##
 		for possible_future_events_event in possible_future_events:
 			#for each possible event, check how many speakers there are
 			num_speakers=0
@@ -245,12 +245,13 @@ def show_recommendations(current_loc, current_next_event):
 							possible_future_events_SCORE[possible_future_events_SCORE_event]=new_score
 
 
-		## FINALIZE EVENTS ##
+		# FINALIZE EVENTS ##
 		highest_score_key=max(possible_future_events_SCORE, key=possible_future_events_SCORE.get)
 		highest_score_value=possible_future_events_SCORE[highest_score_key]
 		for event in possible_future_events_SCORE:
 			if possible_future_events_SCORE[event]==highest_score_value:
 				possible_future_events_final.append(event)
+
 	else:
 		#there are no recommended events for the user based on algorithm
 		message="FAILURE"
